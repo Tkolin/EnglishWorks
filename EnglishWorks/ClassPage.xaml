@@ -1,0 +1,41 @@
+﻿<Page x:Class="EnglishWorks.ClassPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EnglishWorks"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ClassPage" Background="AliceBlue">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="25" Width="350">
+            <TextBlock Text="Выбор класса" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Margin="0,0,0,6"/>
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock VerticalAlignment="Center">Номер класса:</TextBlock>
+                <ComboBox x:Name="CBoxNumberClass" Width="50" Margin="10,0,10,0"></ComboBox>
+                <TextBlock VerticalAlignment="Center">Буква класса:</TextBlock>
+                <ComboBox x:Name="CBoxCharClass" Width="50" Margin="10,0,10,0"></ComboBox>
+                <Button Content="Сброс" Width="50" Name="BtnResetFilter" Click="BtnResetFilter_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock  VerticalAlignment="Center">ФИО учителя:</TextBlock>
+                <TextBox Margin="5" Width="200" x:Name="eventNameBox"></TextBox>
+            </StackPanel>
+
+            <DataGrid Margin="5" Height="260" x:Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Номер" Binding="{Binding Т}" Width="1*"/>
+                    <DataGridTextColumn Header="Буква" Binding="{Binding Name}" Width="3*"/>
+                    <DataGridTextColumn Header="Учитель" Binding="{Binding DateStart}" Width="3*" x:Name="DGridColumTeacher"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel  Orientation="Horizontal" x:Name="CRUDpanel" HorizontalAlignment="Center">
+                <Button Padding="10,0,10,0" Margin="2" x:Name="BtnBack" Click="BtnBack_Click">Назад</Button>
+                <Button Padding="10,0,10,0" Margin="2" x:Name="BtnDel" Click="BtnDel_Click">Удалить</Button>
+                <Button Padding="10,0,10,0" Margin="2" x:Name="BtnAdd" Click="BtnAdd_Click">Создать класс</Button>
+                <Button Padding="10,0,10,0" Margin="2" x:Name="BtnEdit" Click="BtnEdit_Click">Редактировать</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
