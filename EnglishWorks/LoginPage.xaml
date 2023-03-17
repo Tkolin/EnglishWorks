@@ -15,8 +15,8 @@
             <TextBox x:Name="TBoxLogin"  Margin="0,0,0,15"/>
             <TextBlock  Text="Пароль:"/>
             <TextBox x:Name="TBoxPassword"  Margin="0,0,0,15"/>
-            <Button Content="Вход" Margin="5"/>
-            <Button Content="Назад"  Margin="5"/>
+            <Button Content="Вход" x:Name="nextBtn" Click="nextBtn_Click"  Margin="5"/>
+            <Button Content="Назад" x:Name="backBtn" Click="exitBtn_Click" Margin="5"/>
         </StackPanel>
 
     </Grid>

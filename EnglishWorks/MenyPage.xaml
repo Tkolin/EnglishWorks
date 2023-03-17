@@ -10,7 +10,8 @@
 
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Center">
-            <TextBlock Text="Меню" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Margin="0,0,0,30"/>
+            <TextBlock Text="Меню" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" />
+            <TextBlock Text="роль" x:Name="roleTBlock" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold" Margin="0,0,0,30"/>
 
             <Button Width ="150" Margin="3" x:Name="taskBtn" Click="taskBtn_Click">Список заданий</Button>
             <Button Width ="150" Margin="3" x:Name="studentBtn" Click="studentBtn_Click">Список учеников</Button>

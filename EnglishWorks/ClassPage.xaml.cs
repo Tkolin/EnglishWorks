@@ -32,9 +32,13 @@ namespace EnglishWorks
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            CBoxNumberClass.SelectedValuePath = "ID";
+            CBoxNumberClass.SelectedValuePath = "Number";
             CBoxNumberClass.DisplayMemberPath = "Number";
             CBoxNumberClass.ItemsSource = EnglishKlassBDEntities.GetContext().ClassGroup.ToList();
+
+            CBoxCharClass.SelectedValuePath = "Name";
+            CBoxCharClass.DisplayMemberPath = "Name";
+            CBoxCharClass.ItemsSource = EnglishKlassBDEntities.GetContext().ClassGroup.ToList();
 
             dataGrid.ItemsSource = getFilterDB();
         }
@@ -46,7 +50,6 @@ namespace EnglishWorks
                 EnglishKlassBDEntities.GetContext().SaveChanges();
                 MessageBox.Show("Данные удалены! ");
                 dataGrid.ItemsSource = getFilterDB();
-
             }
             catch (Exception ex)
             {
@@ -70,17 +73,23 @@ namespace EnglishWorks
             if (CBoxNumberClass.SelectedValue != null) {
                 int id = (int)CBoxNumberClass.SelectedValue;
             tasks = tasks.Where(t => t.Number == id).ToList(); 
-            }       
+            }
+            if (CBoxCharClass.SelectedValue != null)
+            {
+                string id = (string)CBoxCharClass.SelectedValue;
+                tasks = tasks.Where(t => t.Name == id).ToList();
+            }
             if (eventNameBox.Text.Length > 0)
-                tasks = tasks.Where(t => t.Teachers.Firstname.ToLower() == eventNameBox.Text.ToLower() ||
-                      t.Teachers.Lastname.ToLower() == eventNameBox.Text.ToLower() ||
-                      t.Teachers.Patronymic.ToLower() == eventNameBox.Text.ToLower()).ToList();
+                tasks = tasks.Where(t => t.Teachers.Firstname.ToLower().Contains(eventNameBox.Text.ToLower()) ||
+                      t.Teachers.Lastname.ToLower().Contains( eventNameBox.Text.ToLower()) ||
+                      t.Teachers.Patronymic.ToLower().Contains(eventNameBox.Text.ToLower())).ToList();
 
             return tasks;
         }
         private void BtnResetFilter_Click(object sender, RoutedEventArgs e)
         {
             CBoxNumberClass.SelectedValue = null;
+            CBoxCharClass.SelectedValue = null;
             eventNameBox.Text = null;
 
             dataGrid.SelectedValue = getDB();
@@ -103,5 +112,27 @@ namespace EnglishWorks
         }
 
 
+
+        private void CBoxCharClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dataGrid.ItemsSource = getFilterDB();
+        }
+
+        private void CBoxNumberClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dataGrid.ItemsSource = getFilterDB();
+        }
+
+        private void eventNameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            dataGrid.ItemsSource = getFilterDB();
+        }
+
+        private void BtnAddTaskClass_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataGrid.SelectedValue == null)
+                return;
+            NavigationService.Navigate(new GetAllClassTaskPage((ClassGroup)dataGrid.SelectedValue));
+        }
     }
 }

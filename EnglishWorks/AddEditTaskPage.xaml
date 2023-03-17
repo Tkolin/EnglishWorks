@@ -17,7 +17,8 @@
             <TextBlock Margin="5,0,0,0">Содержание</TextBlock>
             <TextBox Margin="0,0,0,5" x:Name="contentTBox"/>
             <TextBlock Margin="5,0,0,0">Описание</TextBlock>
-            <TextBox Margin="0,0,0,5" x:Name="descTBox"/>
+            <TextBox Margin="0,0,0,5" x:Name="descTBox" Height="100"
+                     TextWrapping="Wrap" AcceptsReturn="True"/>
             <TextBlock Margin="5,0,0,0">Тип задания</TextBlock>
             <ComboBox Margin="0,0,0,5" x:Name="typeCbox"/>
             

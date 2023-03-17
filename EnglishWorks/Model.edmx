@@ -9,8 +9,8 @@
           <Key>
             <PropertyRef Name="Number" />
           </Key>
-          <Property Name="Number" Type="int" Nullable="false" />
-          <Property Name="Task_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Task_ID" Type="int" Nullable="false" />
           <Property Name="Student_ID" Type="int" />
           <Property Name="DateStart" Type="date" />
           <Property Name="DateEnd" Type="date" />
@@ -35,7 +35,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Students">
@@ -279,8 +279,8 @@
           <Key>
             <PropertyRef Name="Number" />
           </Key>
-          <Property Name="Number" Type="Int32" Nullable="false" />
-          <Property Name="Task_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Task_ID" Type="Int32" Nullable="false" />
           <Property Name="Student_ID" Type="Int32" />
           <Property Name="DateStart" Type="DateTime" Precision="0" />
           <Property Name="DateEnd" Type="DateTime" Precision="0" />
@@ -311,7 +311,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
         </EntityType>

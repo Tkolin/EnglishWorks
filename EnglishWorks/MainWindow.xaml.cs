@@ -23,7 +23,7 @@ namespace EnglishWorks
         public MainWindow()
         {
             InitializeComponent();
-
+            MainFrame.Navigate(new LoginPage());
 
         }
     }

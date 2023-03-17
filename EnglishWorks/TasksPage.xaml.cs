@@ -43,9 +43,13 @@ namespace EnglishWorks
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            CBoxNumberClass.SelectedValuePath = "ID";
+            CBoxNumberClass.SelectedValuePath = "Number";
             CBoxNumberClass.DisplayMemberPath = "Number";
             CBoxNumberClass.ItemsSource = EnglishKlassBDEntities.GetContext().ClassGroup.ToList();
+
+            CBoxCharClass.SelectedValuePath = "Name";
+            CBoxCharClass.DisplayMemberPath = "Name";
+            CBoxCharClass.ItemsSource = EnglishKlassBDEntities.GetContext().ClassGroup.ToList();
 
             taskCbox.SelectedValuePath = "ID";
             taskCbox.DisplayMemberPath = "Name";
@@ -59,6 +63,11 @@ namespace EnglishWorks
             if (students != null)
                 tasks = EnglishKlassBDEntities.GetContext().AccountingForTasks
                     .Where(t => t.Student_ID == students.ID).ToList();
+            else if(teachers != null)
+            {
+                tasks = EnglishKlassBDEntities.GetContext().AccountingForTasks
+    .Where(t => t.Students.ClassGroup.Teacher_ID == teachers.ID).ToList();
+            }
             else
                 tasks = EnglishKlassBDEntities.GetContext().AccountingForTasks.ToList();
             return tasks;
@@ -73,7 +82,12 @@ namespace EnglishWorks
             if (CBoxNumberClass.SelectedItem != null) 
             {
                 int _id = (int)CBoxNumberClass.SelectedValue;
-                tasks = tasks.Where(t => t.Students.Class_ID == _id).ToList();
+                tasks = tasks.Where(t => t.Students.ClassGroup.Number == _id).ToList();
+            }
+            if (CBoxCharClass.SelectedItem != null)
+            {
+                string _id = (string)CBoxCharClass.SelectedValue;
+                tasks = tasks.Where(t => t.Students.ClassGroup.Name == _id).ToList();
             }
             if (taskCbox.SelectedItem != null)
             {
@@ -81,9 +95,9 @@ namespace EnglishWorks
                 tasks = tasks.Where(t => t.Task_ID == _id).ToList();
             }
             if(eventNameBox.Text.Length > 0)
-                tasks = tasks.Where(t=> t.Students.Firstname.ToLower() == eventNameBox.Text.ToLower()||
-                      t.Students.Lastname.ToLower() == eventNameBox.Text.ToLower()||
-                      t.Students.Patronymic.ToLower() == eventNameBox.Text.ToLower()).ToList();
+                tasks = tasks.Where(t=> t.Students.Firstname.ToLower().Contains(eventNameBox.Text.ToLower()) ||
+                      t.Students.Lastname.ToLower().Contains(eventNameBox.Text.ToLower()) ||
+                      t.Students.Patronymic.ToLower().Contains(eventNameBox.Text.ToLower())).ToList();
 
             return tasks;
         }
@@ -92,8 +106,10 @@ namespace EnglishWorks
         {
             DPicerEnd.SelectedDate = null;
             DPicerStart.SelectedDate = null;
-            CBoxNumberClass = null;
-            taskCbox = null;
+            CBoxNumberClass.SelectedItem = null;
+            CBoxCharClass.SelectedItem = null;
+            taskCbox.SelectedItem = null;
+            eventNameBox.Text = "";
 
             dataGrid.ItemsSource = getFilterDB();
         }
@@ -133,6 +149,45 @@ namespace EnglishWorks
 
 
 
+        private void CBoxNumberClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dataGrid.ItemsSource = getFilterDB();
+        }
 
+        private void CBoxCharClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dataGrid.ItemsSource = getFilterDB();
+        }
+
+        private void taskCbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dataGrid.ItemsSource = getFilterDB();
+        }
+
+        private void DPicerStart_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dataGrid.ItemsSource = getFilterDB();
+        }
+
+        private void DPicerEnd_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dataGrid.ItemsSource = getFilterDB();
+        }
+
+        private void eventNameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            dataGrid.ItemsSource = getFilterDB();
+        }
+
+        private void viewTask_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataGrid.SelectedValue == null)
+                return;
+            if (students != null)
+                NavigationService.Navigate(new AddEditTaskPage(((AccountingForTasks)dataGrid.SelectedValue).Tasks, true));
+            else
+                NavigationService.Navigate(new AddEditTaskPage(((AccountingForTasks)dataGrid.SelectedValue).Tasks));
+
+        }
     }
 }

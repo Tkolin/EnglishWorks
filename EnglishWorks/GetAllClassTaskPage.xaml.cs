@@ -46,8 +46,14 @@ namespace EnglishWorks
                 classCbox.ItemsSource = EnglishKlassBDEntities.GetContext().ClassGroup.
                     Where(c => c.Teacher_ID == teachers.ID).ToList();
             else
-                classCbox.SelectedValue = classGroup;
+                classCbox.ItemsSource = EnglishKlassBDEntities.GetContext().ClassGroup.ToList();
+     
 
+            if (classGroup != null)
+            {
+                classCbox.SelectedItem = classGroup;
+                classCbox.IsEnabled = false;
+            }
             taskCbox.SelectedValuePath = "ID";
             taskCbox.DisplayMemberPath = "Name";
             taskCbox.ItemsSource = EnglishKlassBDEntities.GetContext().Tasks.ToList();
@@ -75,8 +81,8 @@ namespace EnglishWorks
                 AccountingForTasks taskAcc = new AccountingForTasks();
                 taskAcc.Task_ID = (int)taskCbox.SelectedValue;
                 taskAcc.Student_ID = st.ID;
-                taskAcc.DateStart = startDPicer.SelectedDate.Value;
-                taskAcc.DateEnd = endDPicer.SelectedDate.Value;
+                taskAcc.DateStart = startDPicer.SelectedDate;
+                taskAcc.DateEnd = endDPicer.SelectedDate;
 
                 EnglishKlassBDEntities.GetContext().AccountingForTasks.Add(taskAcc);
             }
@@ -89,6 +95,7 @@ namespace EnglishWorks
             {
                 MessageBox.Show("Ошибка сохранения: " + ex.Message.ToString(), "Критическая ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+            NavigationService.GoBack();
         }
 
 

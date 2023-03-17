@@ -22,11 +22,19 @@ namespace EnglishWorks
     {
         Tasks task;
         bool add;
+        bool isVrite;
         public AddEditTaskPage(Tasks task)
         {
             InitializeComponent();
             this.task = task;
             add = false;
+            DataContext = this;
+        }
+        public AddEditTaskPage(Tasks task, bool isVrite)
+        {
+            InitializeComponent();
+            this.task = task;
+            this.isVrite = isVrite;
             DataContext = this;
 
         }
@@ -38,10 +46,24 @@ namespace EnglishWorks
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
             typeCbox.SelectedValuePath = "ID";
             typeCbox.DisplayMemberPath = "Name";
-            typeCbox.ItemsSource = EnglishKlassBDEntities.GetContext().Tasks.ToList();
+            typeCbox.ItemsSource = EnglishKlassBDEntities.GetContext().TypeTasks.ToList();
+
+            if (!add)
+            {
+                nameTBox.Text = task.Name;
+                contentTBox.Text = task.ContentTasks;
+                descTBox.Text = task.Description;
+                typeCbox.SelectedItem = task.TypeTasks;
+
+                nameTBox.IsEnabled = false;
+                contentTBox.IsEnabled = false;
+                descTBox.IsEnabled = false;
+                typeCbox.IsEnabled = false;
+                saveBtn.Visibility = Visibility.Collapsed;
+            }
+
         }
         private void backBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -63,17 +85,19 @@ namespace EnglishWorks
             task.Description = descTBox.Text;
             task.Type_ID = (int)typeCbox.SelectedValue;
 
-
             if (add)
                 EnglishKlassBDEntities.GetContext().Tasks.Add(task);
+
             try
             {
                 EnglishKlassBDEntities.GetContext().SaveChanges();
+                NavigationService.GoBack();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Ошибка сохранения: " + ex.Message.ToString(), "Критическая ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+
         }
 
 

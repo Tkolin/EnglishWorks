@@ -8,33 +8,35 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TasksPage" Background="AliceBlue" Loaded="Page_Loaded">
 
-    <Grid>
+    <Grid Margin="0,0,0,-30">
         <StackPanel Orientation="Vertical" Margin="25">
             <TextBlock Text="Список заданий" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Margin="0,0,0,6"/>
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,5">
                 <TextBlock VerticalAlignment="Center">Дата начала:</TextBlock>
-                <DatePicker x:Name="DPicerStart" Margin="10,0,10,0"></DatePicker>
+                <DatePicker x:Name="DPicerStart" Margin="10,0,10,0" SelectedDateChanged="DPicerStart_SelectedDateChanged"/>
                 <TextBlock VerticalAlignment="Center">Дата окончания:</TextBlock>
-                <DatePicker x:Name="DPicerEnd" Margin="10,0,10,0"></DatePicker>
+                <DatePicker x:Name="DPicerEnd" Margin="10,0,10,0" SelectedDateChanged="DPicerEnd_SelectedDateChanged"/>
             </StackPanel>
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock VerticalAlignment="Center">Класс: </TextBlock>
-                <ComboBox x:Name="CBoxNumberClass" Width="50" Margin="10,0,10,0"></ComboBox>
+                <TextBlock VerticalAlignment="Center">Номер класса: </TextBlock>
+                <ComboBox x:Name="CBoxNumberClass" Width="50" Margin="10,0,10,0" SelectionChanged="CBoxNumberClass_SelectionChanged"/>
+                <TextBlock VerticalAlignment="Center">Буква класса:</TextBlock>
+                <ComboBox x:Name="CBoxCharClass" Width="50" Margin="10,0,10,0" SelectionChanged="CBoxCharClass_SelectionChanged"/>
                 <TextBlock VerticalAlignment="Center">Задание:</TextBlock>
-                <ComboBox x:Name="taskCbox" Width="100" Margin="10,0,10,0"></ComboBox>
+                <ComboBox x:Name="taskCbox" Width="100" Margin="10,0,10,0" SelectionChanged="taskCbox_SelectionChanged"/>
                 <Button Content="Сброс" Width="50" Name="BtnResetFilter" Click="BtnResetFilter_Click"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" x:Name="studentSearchPanel">
                 <TextBlock  VerticalAlignment="Center">ФИО ученика:</TextBlock>
-                <TextBox Margin="5" Width="200" x:Name="eventNameBox"></TextBox>
+                <TextBox Margin="5" Width="200" x:Name="eventNameBox" TextChanged="eventNameBox_TextChanged"/>
             </StackPanel>
 
             <DataGrid Margin="5" Height="230" x:Name="dataGrid" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Ученик" Binding="{Binding Т}" Width="1*"/>
-                    <DataGridTextColumn Header="Задание" Binding="{Binding Name}" Width="2*"/>
+                    <DataGridTextColumn Header="Ученик" Binding="{Binding Students.Lastname}" Width="1*"/>
+                    <DataGridTextColumn Header="Задание" Binding="{Binding Tasks.Name}" Width="2*"/>
                     <DataGridTextColumn Header="Дата начала" Binding="{Binding DateStart}" Width="1*"/>
-                    <DataGridTextColumn Header="Дата сдачи" Binding="{Binding Т}" Width="1*"/>
+                    <DataGridTextColumn Header="Дата сдачи" Binding="{Binding DateEnd}" Width="1*"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel  Orientation="Horizontal" x:Name="CRUDpanel" HorizontalAlignment="Center">
@@ -42,6 +44,9 @@
                 <Button Padding="10,0,10,0" Margin="2" x:Name="BtnDel" Click="BtnDel_Click">Удалить</Button>
                 <Button Padding="10,0,10,0" Margin="2" x:Name="BtnAdd" Click="BtnAdd_Click">Добавить задание</Button>
                 <Button Padding="10,0,10,0" Margin="2" x:Name="BtnEdit" Click="BtnEdit_Click">Редактировать</Button>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal" x:Name="studentPanel" HorizontalAlignment="Center">
+                <Button Padding="10,0,10,0" Margin="2" x:Name="viewTask" Click="viewTask_Click">Просмотреть содержание задания</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

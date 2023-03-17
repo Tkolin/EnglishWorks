@@ -39,6 +39,13 @@ namespace EnglishWorks
             teacherCbox.SelectedValuePath = "ID";
             teacherCbox.DisplayMemberPath = "Lastname";
             teacherCbox.ItemsSource = EnglishKlassBDEntities.GetContext().Teachers.ToList();
+        
+            if(!add)
+            {
+                nameClassTBox.Text = classGroup.Name;
+                numberClassTBox.Text = classGroup.Number.ToString();
+                teacherCbox.SelectedValue = classGroup.Teacher_ID;
+            }    
         }
         private void backBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -47,12 +54,20 @@ namespace EnglishWorks
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (nameClassTBox.Text.Length == 0 || numberClassTBox.Text.Length == 0)
+            if (nameClassTBox.Text.Length == 0 || numberClassTBox.Text.Length == 0         )
             {
                 MessageBox.Show("Не все поля были заполнены ", "Внимание!",
                     MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
+            if(!char.IsDigit(numberClassTBox.Text.First()) ||
+                char.IsDigit(nameClassTBox.Text.First()))
+            {
+                MessageBox.Show("Не все поля были заполнены корректно ", "Внимание!",
+    MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
 
             classGroup.Name = nameClassTBox.Text;
             classGroup.Number = Convert.ToInt32(numberClassTBox.Text);
@@ -68,6 +83,7 @@ namespace EnglishWorks
             {
                 MessageBox.Show("Ошибка сохранения: " + ex.Message.ToString(), "Критическая ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+            NavigationService.GoBack();
         }
 
 

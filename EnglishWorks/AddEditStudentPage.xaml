@@ -12,8 +12,6 @@
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
                 <TextBlock Text="Редактирование ученика" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Margin="0,0,0,10"/>
-                <TextBlock Margin="5,0,0,0">ID:</TextBlock>
-                <TextBox Margin="0,0,0,5" x:Name="idTBox" IsEnabled="False"/>
                 <TextBlock Margin="5,0,0,0">Фамилия</TextBlock>
                 <TextBox Margin="0,0,0,5" x:Name="lastNameTBox"/>
                 <TextBlock Margin="5,0,0,0">Имя</TextBlock>
@@ -24,8 +22,18 @@
                 <DatePicker Margin="0,0,0,5" x:Name="birthDPicer"/>
                 <TextBlock Margin="5,0,0,0">Пол</TextBlock>
                 <ComboBox Margin="0,0,0,5" x:Name="genderCbox"/>
-                <TextBlock Margin="5,0,0,0">Класс</TextBlock>
-                <ComboBox Margin="0,0,0,5" x:Name="classCbox"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="5,0,5,0" >Класс:</TextBlock>
+                    <ComboBox Margin="0,0,0,5" x:Name="classCharCbox" Width="40"
+                              SelectionChanged="classCharCbox_SelectionChanged"/>
+                    <TextBlock Margin="5,0,5,0">Номер:</TextBlock>
+                    <TextBox Margin="0,0,0,5" x:Name="charTBox" Width="40" IsEnabled="False"
+                             Text="{Binding  ElementName=classCharCbox, Path=SelectedItem.Name}"/>
+                    <TextBlock Margin="5,0,5,0">Номер:</TextBlock>
+                    <TextBox Margin="0,0,0,5" x:Name="numbTBox" Width="40" IsEnabled="False"
+                             Text="{Binding  ElementName=classCharCbox, Path=SelectedItem.Number}"/>
+                </StackPanel>
+
                 <TextBlock Margin="5,0,0,0">Учётная запись</TextBlock>
                 <ComboBox Margin="0,0,0,5" x:Name="lkCbox"/>
             </StackPanel>
