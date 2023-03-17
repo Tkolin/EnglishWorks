@@ -30,10 +30,14 @@ namespace EnglishWorks
 
         private void nextBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (loginSearch() != -1)
-                NavigationService.Navigate(new MenyPage());
-            else
-                MessageBox.Show("Ошибка входа");
+
+            if (loginSearch() == null) {
+                MessageBox.Show("Проверьте введеные данные", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            Users users = loginSearch();
+
+            NavigationService.Navigate(new MenyPage(users));
         }
 
 
@@ -43,18 +47,18 @@ namespace EnglishWorks
         }
 
 
-        private int loginSearch()
+        private Users loginSearch()
         {
             foreach (Users checkUser in users)
             {
                 if (checkUser.Login.ToLower() == TBoxLogin.Text.ToLower() &&
                     checkUser.Password == TBoxPassword.Text)
                 {
-                    return (int)checkUser.Role_ID;
+                    return checkUser;
                 }
 
             }
-            return -1;
+            return null;
         }
     }
 }

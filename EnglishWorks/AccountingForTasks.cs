@@ -15,7 +15,7 @@ namespace EnglishWorks
     public partial class AccountingForTasks
     {
         public int Number { get; set; }
-        public Nullable<int> Task_ID { get; set; }
+        public int Task_ID { get; set; }
         public Nullable<int> Student_ID { get; set; }
         public Nullable<System.DateTime> DateStart { get; set; }
         public Nullable<System.DateTime> DateEnd { get; set; }

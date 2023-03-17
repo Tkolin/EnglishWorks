@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:EnglishWorks"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="GetAllClassTaskPage">
+      Title="GetAllClassTaskPage" Loaded="Page_Loaded">
 
     <Grid Background="AntiqueWhite">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Center">
@@ -14,7 +14,11 @@
             <TextBlock Margin="5,0,0,0" Width="150">Класс</TextBlock>
             <ComboBox Margin="0,0,0,5" x:Name="classCbox" Width="150"/>
             <TextBlock Margin="5,0,0,0" Width="150">Задание</TextBlock>
-            <ComboBox Margin="0,0,0,5" x:Name="lkCbox" Width="150"/>
+            <ComboBox Margin="0,0,0,5" x:Name="taskCbox" Width="150"/>
+            <TextBlock Margin="5,0,0,0" Width="150">Дата начала</TextBlock>
+            <DatePicker Margin="0,0,0,5" x:Name="startDPicer" Width="150"/>
+            <TextBlock Margin="5,0,0,0" Width="150">Дата сдачи</TextBlock>
+            <DatePicker Margin="0,0,0,5" x:Name="endDPicer" Width="150"/>
             <Button Width ="120" Margin="3" x:Name="backBtn" Click="backBtn_Click">Отмена</Button>
             <Button Width ="120" Margin="3" x:Name="saveBtn" Click="saveBtn_Click">Задать</Button>
         </StackPanel>

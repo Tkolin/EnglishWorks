@@ -6,13 +6,13 @@
       xmlns:local="clr-namespace:EnglishWorks"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MenyPage" Background="AliceBlue">
+      Title="MenyPage" Background="AliceBlue" Loaded="Page_Loaded">
 
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Center">
             <TextBlock Text="Меню" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Margin="0,0,0,30"/>
 
-            <Button Width ="150" Margin="3" x:Name="taskBtn" Click="taskBtn_Click">Узнать задания</Button>
+            <Button Width ="150" Margin="3" x:Name="taskBtn" Click="taskBtn_Click">Список заданий</Button>
             <Button Width ="150" Margin="3" x:Name="studentBtn" Click="studentBtn_Click">Список учеников</Button>
             <Button Width ="150"  Margin="3,3,3,20" x:Name="classBtn" Click="classBtn_Click" >Список классов</Button>
 

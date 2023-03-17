@@ -6,17 +6,15 @@
       xmlns:local="clr-namespace:EnglishWorks"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ClassPage" Background="AliceBlue">
+      Title="ClassPage" Background="AliceBlue" Loaded="Page_Loaded">
 
     <Grid>
         <StackPanel Orientation="Vertical" Margin="25" Width="350">
             <TextBlock Text="Выбор класса" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Margin="0,0,0,6"/>
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock VerticalAlignment="Center">Номер класса:</TextBlock>
+                <TextBlock VerticalAlignment="Center">Класс:</TextBlock>
                 <ComboBox x:Name="CBoxNumberClass" Width="50" Margin="10,0,10,0"></ComboBox>
-                <TextBlock VerticalAlignment="Center">Буква класса:</TextBlock>
-                <ComboBox x:Name="CBoxCharClass" Width="50" Margin="10,0,10,0"></ComboBox>
-                <Button Content="Сброс" Width="50" Name="BtnResetFilter" Click="BtnResetFilter_Click"/>
+              <Button Content="Сброс" Width="50" Name="BtnResetFilter" Click="BtnResetFilter_Click"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock  VerticalAlignment="Center">ФИО учителя:</TextBlock>

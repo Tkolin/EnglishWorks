@@ -6,13 +6,12 @@
       xmlns:local="clr-namespace:EnglishWorks"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddEditTaskPage" Background="AliceBlue">
+      Title="AddEditTaskPage" Background="AliceBlue" Loaded="Page_Loaded">
 
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10" Width="300">
             <TextBlock Text="Задания" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Margin="0,0,0,10" />
-            <TextBlock Margin="5,0,0,0">ID:</TextBlock>
-            <TextBox Margin="0,0,0,5" x:Name="idTBox" IsEnabled="False"/>
+
             <TextBlock Margin="5,0,0,0">Название</TextBlock>
             <TextBox Margin="0,0,0,5" x:Name="nameTBox"/>
             <TextBlock Margin="5,0,0,0">Содержание</TextBlock>

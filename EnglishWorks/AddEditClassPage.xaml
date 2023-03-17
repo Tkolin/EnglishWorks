@@ -6,20 +6,18 @@
       xmlns:local="clr-namespace:EnglishWorks"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddEditClassPage" Background="AliceBlue">
+      Title="AddEditClassPage" Background="AliceBlue" Loaded="Page_Loaded">
 
     <Grid Background="AliceBlue">
-        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" >
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10" >
                 <TextBlock Text="Редактирование класса" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Margin="0,0,0,10"/>
-                <TextBlock Margin="5,0,0,0">ID:</TextBlock>
-                <TextBox Margin="0,0,0,5" x:Name="idTBox" IsEnabled="False"></TextBox>
                 <TextBlock Margin="5,0,0,0">Название (буква)</TextBlock>
-                <TextBox HorizontalAlignment="Left"  Width="50" Margin="5,0,0,5" x:Name="firstNameTBox"></TextBox>
+                <TextBox HorizontalAlignment="Left"  Width="50" Margin="5,0,0,5" x:Name="nameClassTBox"></TextBox>
                 <TextBlock Margin="5,0,0,0">Номер класса</TextBlock>
-                <TextBox  x:Name="roleCbox" Width="50" HorizontalAlignment="Left" Margin="5,0,0,5"/>
+                <TextBox  x:Name="numberClassTBox" Width="50" HorizontalAlignment="Left" Margin="5,0,0,5"/>
                 <TextBlock Margin="5,0,0,0">Учитель</TextBlock>
-                <ComboBox Margin="0,0,0,5" x:Name="lastNameTBox"  Width="150" HorizontalAlignment="Left"></ComboBox>
+                <ComboBox Margin="0,0,0,5" x:Name="teacherCbox"  Width="150" HorizontalAlignment="Left"></ComboBox>
             </StackPanel>
 
 

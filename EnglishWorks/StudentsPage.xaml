@@ -41,9 +41,9 @@
                 <Button Padding="10,0,10,0" Margin="2" x:Name="BtnEdit" Click="BtnEdit_Click">Редактировать</Button>
             </StackPanel>
             <StackPanel  Orientation="Horizontal" x:Name="TaskPanel" HorizontalAlignment="Center">
-                <Button Padding="10,0,10,0" Margin="2" x:Name="BtnAddTaskClassDel" Click="BtnDel_Click">Добавить задание классу</Button>
-                <Button Padding="10,0,10,0" Margin="2" x:Name="BtnAddTaskStudent" Click="BtnDel_Click">Добавить задание студенту</Button>
-                <Button Padding="10,0,10,0" Margin="2" x:Name="BtnViewTaskClass" Click="BtnAdd_Click">Просмотреть список заданий класса</Button>
+                <Button Padding="10,0,10,0" Margin="2" x:Name="BtnAddTaskClassDel" Click="BtnAddTaskClassDel_Click">Добавить задание классу</Button>
+                <Button Padding="10,0,10,0" Margin="2" x:Name="BtnAddTaskStudent" Click="BtnAddTaskStudent_Click">Добавить задание студенту</Button>
+                <Button Padding="10,0,10,0" Margin="2" x:Name="BtnViewTaskClass" Click="BtnViewTaskClass_Click">Просмотреть список заданий класса</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

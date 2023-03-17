@@ -24,7 +24,13 @@ namespace EnglishWorks
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+        private static EnglishKlassBDEntities _context;
+        public static EnglishKlassBDEntities GetContext()
+        {
+            if (_context == null)
+                _context = new EnglishKlassBDEntities();
+            return _context;
+        }
         public virtual DbSet<AccountingForTasks> AccountingForTasks { get; set; }
         public virtual DbSet<ClassGroup> ClassGroup { get; set; }
         public virtual DbSet<Genders> Genders { get; set; }
@@ -35,14 +41,5 @@ namespace EnglishWorks
         public virtual DbSet<Teachers> Teachers { get; set; }
         public virtual DbSet<TypeTasks> TypeTasks { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-
-
-        private static EnglishKlassBDEntities _context;
-        public static EnglishKlassBDEntities GetContext()
-        {
-            if (_context == null)
-                _context = new EnglishKlassBDEntities();
-            return _context;
-        }
     }
 }

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:EnglishWorks"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="TasksPage" Background="AliceBlue">
+      Title="TasksPage" Background="AliceBlue" Loaded="Page_Loaded">
 
     <Grid>
         <StackPanel Orientation="Vertical" Margin="25">
@@ -18,18 +18,18 @@
                 <DatePicker x:Name="DPicerEnd" Margin="10,0,10,0"></DatePicker>
             </StackPanel>
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock VerticalAlignment="Center">Дата начала:</TextBlock>
+                <TextBlock VerticalAlignment="Center">Класс: </TextBlock>
                 <ComboBox x:Name="CBoxNumberClass" Width="50" Margin="10,0,10,0"></ComboBox>
                 <TextBlock VerticalAlignment="Center">Задание:</TextBlock>
-                <ComboBox x:Name="genderCbox" Width="100" Margin="10,0,10,0"></ComboBox>
+                <ComboBox x:Name="taskCbox" Width="100" Margin="10,0,10,0"></ComboBox>
                 <Button Content="Сброс" Width="50" Name="BtnResetFilter" Click="BtnResetFilter_Click"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" x:Name="studentSearchPanel">
                 <TextBlock  VerticalAlignment="Center">ФИО ученика:</TextBlock>
                 <TextBox Margin="5" Width="200" x:Name="eventNameBox"></TextBox>
             </StackPanel>
 
-            <DataGrid Margin="5" Height="230" x:Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid Margin="5" Height="230" x:Name="dataGrid" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Ученик" Binding="{Binding Т}" Width="1*"/>
                     <DataGridTextColumn Header="Задание" Binding="{Binding Name}" Width="2*"/>
