@@ -23,6 +23,7 @@
 
             <Button Width ="150" Margin="3" x:Name="getClassTaskBtn" Click="getClassTaskBtn_Click">Задать задание классу</Button>
             <Button Width ="150"  Margin="3,3,3,20" x:Name="getStudentTaskBtn" Click="getStudentTaskBtn_Click">Задать задание ученику</Button>
+            <Button Width ="150"  Margin="3,3,3,20" x:Name="otchetForTaskBtn" Click="otchetForTaskBtn_Click">Отчёт по заданиям</Button>
 
             <Button Width ="150" Margin="3" x:Name="backBtn" Click="backBtn_Click">Выход</Button>
         </StackPanel>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace EnglishWorks
     /// <summary>
     /// Логика взаимодействия для MenyPage.xaml
     /// </summary>
-    public partial class MenyPage : Page
+    public partial class MenyPage : System.Windows.Controls.Page
     {
         Users users;
         Students students;
@@ -60,7 +61,8 @@ namespace EnglishWorks
 
                     getClassTaskBtn.Visibility = Visibility.Collapsed;
                     getStudentTaskBtn.Visibility = Visibility.Collapsed;
-                    if(EnglishKlassBDEntities.GetContext().Students.Where(t => t.Users_ID == id).ToList().Count() == 0)
+                    otchetForTaskBtn.Visibility= Visibility.Collapsed;
+                    if (EnglishKlassBDEntities.GetContext().Students.Where(t => t.Users_ID == id).ToList().Count() == 0)
                     {
                         NavigationService.GoBack();
                         MessageBox.Show("Данная учётная запись не приаязана к ученику!");
@@ -138,6 +140,81 @@ namespace EnglishWorks
 
         }
 
+        private void otchetForTaskBtn_Click(object sender, RoutedEventArgs e)
+        {
+            getOtchetTask();
+        }
+        public void getOtchetTask()
+        {
+            //подключение таблиц
+            Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+            app.Visible = true;
+            app.WindowState = XlWindowState.xlMaximized;
 
+            //создание страницы
+            Workbook wb = app.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
+            Worksheet ws = wb.Worksheets[1];
+
+            //18
+            //форматирование текста
+            ws.StandardWidth = 18;
+
+            ws.Range["B1:F1"].Merge(); ws.Range["B2:F2"].Merge(); ws.Range["C4:F4"].Merge();
+            ws.Range["B1"].Value = "Расписание заданий учителя";
+            if(teacher != null)
+            ws.Range["B2"].Value = teacher.Firstname+" "+ teacher.Lastname+" " + teacher.Patronymic;
+            ws.Range["B4"].Value = "На дату:";
+            ws.Range["C4"].Value = DateTime.Now.Year+"."+DateTime.Now.Month+"."+DateTime.Now.Day;
+
+            ws.Range["A6"].Value = "Класс:"; ws.Range["A6"].ColumnWidth = 6;
+            ws.Range["B6"].Value = "Имя студента"; 
+            ws.Range["C6"].Value = "Фамилия студента";
+            ws.Range["D6"].Value = "Отчество студента";
+            ws.Range["E6"].Value = "Наименование задания"; ws.Range["E6"].ColumnWidth = 23;
+            ws.Range["F6"].Value = "Дата выдачи"; ws.Range["f6"].ColumnWidth = 12;
+            ws.Range["G6"].Value = "Дата сдачи"; ws.Range["g6"].ColumnWidth = 12;
+
+            //Строки - начала и конца таблицы данных
+            int startRow = 7;
+            int endRow = 7;
+
+
+            //Спиоск классов у данного руководителя
+            List<ClassGroup> clasGrupList = new List<ClassGroup>();
+            if (teacher != null)
+            clasGrupList = 
+                EnglishKlassBDEntities.GetContext().ClassGroup
+                .Where(cg => cg.Teacher_ID == teacher.ID).ToList();
+            else
+                clasGrupList = 
+                    EnglishKlassBDEntities.GetContext().ClassGroup.ToList();
+
+
+            foreach (ClassGroup cl in clasGrupList)
+            {
+
+                //Список актуальных заданий в данном классе 
+                List<AccountingForTasks> accForTask = EnglishKlassBDEntities.GetContext().AccountingForTasks
+                    .Where(t => t.Students.ClassGroup.ID == cl.ID)
+                    .Where(ac => ac.DateStart > DateTime.Now).ToList();
+
+                if (accForTask.ToList().Count == 0)
+                    continue;
+
+                //запись данных
+                ws.Range["A" + endRow].Value = cl.Name + cl.Number.ToString();
+                foreach(AccountingForTasks aft in accForTask)
+                {
+                    ws.Range["B"+endRow].Value = aft.Students.Firstname;
+                    ws.Range["C" + endRow].Value = aft.Students.Lastname;
+                    ws.Range["D" + endRow].Value = aft.Students.Patronymic;
+                    ws.Range["E" + endRow].Value = aft.Tasks.Name;
+                    ws.Range["F" + endRow].Value = aft.DateStart;
+                    ws.Range["G" + endRow].Value = aft.DateEnd;
+                    endRow++;
+                }
+                
+            }
+        }
     }
 }
